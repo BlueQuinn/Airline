@@ -28,6 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+app.use('/airlines/airports', require('./routes/airport'));
+app.use('/airlines/flights', require('./routes/flight'));
+app.use('/airlines/bookings', require('./routes/booking'));
+app.use('/airlines/passengers', require('./routes/passenger'));
+
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -61,8 +69,10 @@ app.use(function(err, req, res, next) {
 
 
 
-
-
+var port = process.env.PORT || 8080;
+app.listen(port, function(){
+  console.log("Server listening on port " + port);
+});
 
 
 

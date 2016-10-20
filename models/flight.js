@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var FlightSchema = new Schema({
-    _id: String,
+    flightId: String,
     departure: String,
     arrival: String,
     date: Date,
@@ -21,4 +21,4 @@ var FlightSchema = new Schema({
     ]
 });
 
-module.exports = mongoose.model('FlightSchema', FlightSchema);
+module.exports = mongoose.model('Flight', FlightSchema);

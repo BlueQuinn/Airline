@@ -5,9 +5,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var FlightCodeSchema = new Schema({
+var AirportSchema = new Schema({
     airportId: String,
     name: String
 });
 
-module.exports = mongoose.model('FlightCodeSchema', FlightCodeSchema);
+module.exports = mongoose.model('Airport', AirportSchema);

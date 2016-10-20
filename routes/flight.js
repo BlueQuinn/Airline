@@ -14,3 +14,8 @@ router.get('/:departure', function (req, res) {
     });
 });
 
+
+
+
+module.exports = router;
+
