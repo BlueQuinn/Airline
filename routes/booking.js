@@ -14,9 +14,9 @@ router.post('/', function (req, res) {
         if (err)
             res.send(err);
 
-        var docs = new Booking();     // in seconds
-        docs._id = new ObjectId(hashids.encode(count));
-        docs.date = new Date().getTime() * 1000;
+        var docs = new Booking();
+        docs.bookingId = hashids.encode(count);
+        docs.date = new Date().getTime() * 1000;     // in seconds
         docs.status = false;
         docs.flights = req.flights;
         docs.passengers = req.passengers;
@@ -44,3 +44,8 @@ router.post('/', function (req, res) {
 
     });
 });
+
+
+
+
+module.exports = router;

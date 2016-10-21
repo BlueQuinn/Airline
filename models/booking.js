@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var BookingSchema = new Schema({
-    _id: String,
+    bookingId: String,
     date: Date,
     cost: Number,
     status: Boolean,
@@ -28,4 +28,4 @@ var BookingSchema = new Schema({
     ]
 });
 
-module.exports = mongoose.model('BookingSchema', BookingSchema);
+module.exports = mongoose.model('Booking', BookingSchema);

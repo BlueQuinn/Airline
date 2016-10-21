@@ -6,19 +6,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var FlightSchema = new Schema({
-    _id: String,
+    flightId: String,
     departure: String,
     arrival: String,
-    date: Date,
+    date: String,
     time: String,
-    price: [
+    info: [
         {
             class: String,
-            grade: String,
-            seat_count: Number,
+            price: String,
+            total_seat: Number,
+            available_seat: Number,
             cost: Number
         }
     ]
 });
 
-module.exports = mongoose.model('FlightSchema', FlightSchema);
+module.exports = mongoose.model('Flight', FlightSchema);

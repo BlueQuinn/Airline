@@ -39,4 +39,4 @@ var PassengerSchema = new Schema({
     ]
 });
 
-module.exports = mongoose.model('PassengerSchema', PassengerSchema);
+module.exports = mongoose.model('Passenger', PassengerSchema);

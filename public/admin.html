@@ -1,0 +1,161 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Quản lý sân bay</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="stylesheets/materialize.css">
+    <link rel="stylesheet" href="stylesheets/ngProgress.css">
+    <link rel="stylesheet" href="stylesheets/toaster.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body ng-cloak ng-app="app">
+<h3>Admin Dashboard</h3>
+
+<div class="container" ng-controller="AirportController">
+    <h5>Airports Dashboard</h5>
+    <form name="airport_dashboard" novalidate>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Airport code</th>
+                <th>City</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in airports">
+                <td>{{item.airportId}}</td>
+                <td>{{item.name}}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn-transparent" ng-click="delete(item)">
+                            <i class="material-icons">delete</i>
+                        </button>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input class="form-control" ng-model="airport.airportId" required="" placeholder="Mã số sinh viên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="airport.name" placeholder="Họ tên">
+                </td>
+
+                <td>
+                    <button class="btn btn-lg" ng-click="add(airport)" ng-if="!airport._id" type="submit"
+                            ng-disabled="!airport_dashboard.$valid">
+                        <span class="glyphicon glyphicon-plus">Thêm</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<br>
+
+<div class="container" ng-controller="FlightController">
+    <h5>Flights Dashboard</h5>
+    <form name="flight_dashboard" novalidate>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Mã chuyến bay</th>
+                <th>Nơi đi</th>
+                <th>Nơi đến</th>
+                <th>Ngày</th>
+                <th>Giờ bay</th>
+                <th>Hạng vé</th>
+                <th>Mức giá</th>
+                <th>Số ghế</th>
+                <th>Giá vé</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in flights">
+                <td>{{item.flightId}}</td>
+                <td>{{item.departure}}</td>
+                <td>{{item.arrival}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.class}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.total_seat}}</td>
+                <td>{{item.cost}}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn-transparent" ng-click="delete(item)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input class="form-control" ng-model="flight.flightId" required="" placeholder="Mã số sinh viên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.departure" placeholder="Họ tên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.arrival" placeholder="Họ tên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.date" required="" placeholder="Mã số sinh viên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.time" placeholder="Họ tên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.info.class" required="" placeholder="Mã số sinh viên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.info.price" placeholder="Họ tên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.info.total_seat" required=""
+                           placeholder="Mã số sinh viên">
+                </td>
+                <td>
+                    <input class="form-control" ng-model="flight.info.cost" required=""
+                           placeholder="Mã số sinh viên">
+                </td>
+
+                <td>
+                    <button class="btn btn-lg" ng-click="add(flight)" ng-if="!flight._id" type="submit"
+                            ng-disabled="!flight_dashboard.$valid">
+                        <span class="glyphicon glyphicon-plus">Thêm</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<div data-loading></div>
+<toaster-container
+        toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+
+<script src="javascripts/jquery-3.1.0.slim.min.js"></script>
+<script src="javascripts/materialize.js"></script>
+<script src="javascripts/angular.min.js"></script>
+<script src="javascripts/angular-resource.min.js"></script>
+<script src="javascripts/angular-animate.min.js"></script>
+<script src="javascripts/ngProgress.min.js"></script>
+<script src="javascripts/toaster.js"></script>
+<script src="app/app.js"></script>
+<script src="app/factory.js"></script>
+<script src="app/airport.js"></script>
+<script src="app/flight.js"></script>
+</body>
+</html>

@@ -1,8 +1,48 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak 
+{
+	display: none !important;
 }
 
-a {
-  color: #00B7FF;
+body
+{
+	padding: 5%;
+	background-color: #F5F5F5;
+}
+
+.btn-transparent
+{
+	background-color: transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.btn-transparent:hover
+{
+	background-color: #009688;
+}
+
+th
+{
+	color: #009688;
+}
+
+.container
+{
+	background-color: white;
+	box-shadow: 5px 5px 5px #B0BEC5;
+	padding: 3%;
+	margin:0 auto;
+}
+
+i
+{
+	color: #009688;
+}
+
+i:hover
+{
+	color: white;
 }
