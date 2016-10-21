@@ -11,9 +11,7 @@ router.get('/', function (req, res) {
     switch (filterQuery(req.query))
     {
         case SEARCH_FLIGHTs: {
-
             var flights = [];
-
             var query = {
                 departure: req.query.departure,
                 arrival: req.query.arrival,
@@ -30,7 +28,7 @@ router.get('/', function (req, res) {
                 flights = docs;
                 //for (var i in docs)
                 //    flight =
-                res.json(docs);
+                //res.json(docs);
 
                 if (req.query.return_date !== undefined) {
                     query.departure = req.query.arrival;
@@ -42,9 +40,10 @@ router.get('/', function (req, res) {
                             res.send(err);
                             return;
                         }
+                        flights = flights.concat(docs);
+                        res.json(flights);
                     });
                 }
-
 
             });
             break;
@@ -61,7 +60,7 @@ router.get('/', function (req, res) {
         }
 
         case GET_ALL_FLIGHTS: {
-            Flight.find({departure: req.query.departure}, function (err, docs) {
+            Flight.find({}, function (err, docs) {
                 if (err)
                     res.send(err);
                 res.json(docs);
@@ -71,21 +70,11 @@ router.get('/', function (req, res) {
     }
 });
 
-/*router.get('/', function (req, res) {
-    var condition = {
-        departure: req.query.departure,
-        arrival: req.query.arrival,
-        date: req.query.date,
-        seat_count: req.query.departure,
-        departure: req.query.departure,
-    };
-    Flight.find()
-});*/
-
 // admin
 router.post('/', function (req, res) {
 
     var flight = Object.assign(new Flight(), req.body);
+    flight.info.available_seat = flight.info.total_seat;
     flight.date = flight.date.toString();
 
     Flight.find({flightId: flight.flightId, date: flight.date}, function (err, data) {
@@ -106,7 +95,7 @@ router.post('/', function (req, res) {
             });
         }
         else {
-            if (flight.info.length > 0) {
+            if (flight.info !== undefined) {
                 data[0].info.push(flight.info);
                 data[0].save(function (err, docs) {
                     if (err)

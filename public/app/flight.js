@@ -5,9 +5,9 @@
 app.controller('FlightController', function ($scope, Flight) {
 
     var reload = function () {
-        Flight.query(function () {
+        Flight.query(function (data) {
             $scope.flights = [];
-            for (var flight in data) {
+            data.forEach(function (flight) {
                 var item = {};
                 item.flightId = flight.flightId;
                 item.departure = flight.departure;
@@ -15,16 +15,15 @@ app.controller('FlightController', function ($scope, Flight) {
                 item.date = flight.date;
                 item.time = flight.time;
 
-                for (var info in flight.info) {
+                flight.info.forEach(function (info) {
                     item.class = info.class;
                     item.price = info.price;
                     item.total_seat = info.total_seat;
-                    item.available_seat = info.available_seat;
                     item.cost = info.cost;
 
                     $scope.flights.push(item);
-                }
-            }
+                });
+            });
         });
 
         $scope.flight = {};
