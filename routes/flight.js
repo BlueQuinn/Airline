@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 
     switch (filterQuery(req.query))
     {
-        case SEARCH_FLIGHTs: {
+        case SEARCH_FLIGHTS: {
             var flights = [];
             var query = {
                 departure: req.query.departure,
@@ -70,53 +70,10 @@ router.get('/', function (req, res) {
     }
 });
 
-// admin
-router.post('/', function (req, res) {
-
-    var flight = Object.assign(new Flight(), req.body);
-    flight.info.available_seat = flight.info.total_seat;
-    flight.date = flight.date.toString();
-
-    Flight.find({flightId: flight.flightId, date: flight.date}, function (err, data) {
-        if (err) {
-            res.send(err);
-            return;
-        }
-
-        if (data.length < 1) {
-            flight.save(function (err, docs) {
-                if (err)
-                    res.send(err);
-                res.json(
-                    {
-                        message: "Thêm chuyến bay thành công."
-                    }
-                );
-            });
-        }
-        else {
-            if (flight.info !== undefined) {
-                data[0].info.push(flight.info);
-                data[0].save(function (err, docs) {
-                    if (err)
-                        res.send(err);
-                    res.json(
-                        {
-                            message: "Thêm chuyến bay thành công."
-                        }
-                    );
-                });
-            }
-        }
-    });
-
-});
-
-
 function filterQuery(query) {
     if (query.departure !== undefined && query.arrival !== undefined &&
         query.seat_count !== undefined && query.date !== undefined)
-        return SEARCH_FLIGHTs;
+        return SEARCH_FLIGHTS;
 
     if (query.departure !== undefined)
         return GET_ARRIVAL;
@@ -126,7 +83,7 @@ function filterQuery(query) {
 
 
 
-var SEARCH_FLIGHTs = 1;
+var SEARCH_FLIGHTS = 1;
 var GET_ALL_FLIGHTS = 2;
 var GET_ARRIVAL = 3;
 

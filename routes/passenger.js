@@ -8,8 +8,7 @@ var router = express.Router();
 
 router.post('/', function (req, res) {
 
-    var passenger = new Passenger();
-    passenger = req.body;
+    var passenger = Object.assign(new Passenger, req.body);
 
     passenger.save(function (err, docs) {
         if (err)

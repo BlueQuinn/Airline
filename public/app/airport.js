@@ -21,13 +21,4 @@ app.controller('AirportController', function ($scope, Airport) {
     };
 
     reload();
-
-    $scope.add = function (airport) {
-        //var airport = {airportId: $scope.airportId, name: $scope.name};
-        Airport.save(airport, function () {
-            console.log(airport);
-            reload();
-        });
-    };
-
 });
