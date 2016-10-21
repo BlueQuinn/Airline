@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="app">
+
+<div id="airport" ng-controller="AirportController">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Airport code</th>
+            <th>City</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in airports">
+            <td>{{item.airportId}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn-transparent" ng-click="delete(airport)">
+                        Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input ng-model="airport.airportId">
+    <input ng-model="airport.name">
+    <button type="button" ng-click="add(airport)">
+        Add
+        </button>
+</div>
+
+<br>
+
+<div id="flight" ng-controller="FlightController">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Mã chuyến bay</th>
+            <th>Nơi đi</th>
+            <th>Nơi đến</th>
+            <th>Ngày</th>
+            <th>Giờ bay</th>
+            <th>Hạng vé</th>
+            <th>Mức giá</th>
+            <th>Số ghế</th>
+            <th>Giá vé</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in flights">
+            <td>{{item.flightId}}</td>
+            <td>{{item.departure}}</td>
+            <td>{{item.arrival}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.time}}</td>
+            <td>{{item.info.class}}</td>
+            <td>{{item.info.price}}</td>
+            <td>{{item.info.seat_count}}</td>
+            <td>{{item.info.cost}}</td>
+
+
+
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn-transparent" ng-click="delete(airport)">
+                        Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input ng-model="flight.flightId">
+    <input ng-model="flight.departure">
+    <input ng-model="flight.arrival">
+    <input ng-model="flight.date">
+    <input ng-model="flight.time">
+    <input ng-model="flight.info.class">
+    <input ng-model="flight.info.price">
+    <input ng-model="flight.info.seat_count">
+    <input ng-model="flight.info.cost">
+    <button type="button" ng-click="add(flight)">
+        Add
+    </button>
+</div>
+
+
+<script src="javascripts/jquery-3.1.0.slim.min.js"></script>
+<script src="javascripts/angular.min.js"></script>
+<script src="javascripts/angular-resource.min.js"></script>
+<script src="app/app.js"></script>
+<script src="app/factory.js"></script>
+<script src="app/airport.js"></script>
+<script src="app/flight.js"></script>
+
+</body>
+</html>

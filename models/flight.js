@@ -9,13 +9,14 @@ var FlightSchema = new Schema({
     flightId: String,
     departure: String,
     arrival: String,
-    date: Date,
+    date: String,
     time: String,
-    price: [
+    info: [
         {
             class: String,
-            grade: String,
-            seat_count: Number,
+            price: String,
+            total_seat: Number,
+            available_seat: Number,
             cost: Number
         }
     ]

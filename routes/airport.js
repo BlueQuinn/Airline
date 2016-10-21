@@ -3,7 +3,6 @@
  */
 
 var router = require('express').Router();
-var ObjectID = require('mongodb').ObjectID;
 var Airport = require('../models/airport');
 
 router.get('/', function (req, res) {
@@ -16,10 +15,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 
-
-    var airport = new Airport();
-    airport.airportId = req.body.airportId;
-    airport.name = req.body.name;
+    var airport = Object.assign(new Airport(), req.body);
 
     airport.save(function (err, docs) {
         if (err)
