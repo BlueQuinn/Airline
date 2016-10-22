@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var AirportSchema = new Schema({
+    country: String,
     airportId: String,
     name: String
 });
