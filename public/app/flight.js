@@ -12,7 +12,7 @@ app.controller('FlightController', function ($scope, Flight) {
                 item.flightId = flight.flightId;
                 item.departure = flight.departure;
                 item.arrival = flight.arrival;
-                item.date = flight.date;
+                item.date = (new Date(flight.date)).toDateString();
                 item.time = flight.time;
 
                 flight.info.forEach(function (info) {
@@ -32,21 +32,13 @@ app.controller('FlightController', function ($scope, Flight) {
 
     reload();
 
-    $scope.add = function (flight) {
-        flight.date = (new Date()).getTime();
-        Flight.save(flight, function () {
-            console.log(flight);
-            reload();
-        });
-    };
-
-
     $scope.getArrival = function () {
         $scope.departureId = 'HAN';
         Flight.query({departure: $scope.departureId}, function (data) {
             $scope.arrival = [];
-            for (var i in data)
-                $scope.arrival.push(i);
+            data.forEach(function (item) {
+                $scope.arrival.push(item);
+            });
         });
     };
 
@@ -64,12 +56,4 @@ app.controller('FlightController', function ($scope, Flight) {
 
             });
     };
-
-
-    $scope.book = function (flight) {
-        Flight.save(flight, function () {
-
-        });
-    };
-
 });
