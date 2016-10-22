@@ -6,7 +6,7 @@ var Hashids = require('hashids');
 var express = require('express');
 var Booking = require('../models/booking')
 var router = express.Router();
-var hashids = new Hashids("1312465_1312548_1312561", 6);
+var hashids = new Hashids();
 
 router.post('/', function (req, res) {
 
@@ -18,13 +18,13 @@ router.post('/', function (req, res) {
         docs.bookingId = hashids.encode(count);
         docs.date = new Date().getTime() * 1000;     // in seconds
         docs.status = false;
-        docs.flights = req.body.flights;
-        docs.passengers = req.body.passengers;
+        docs.flights = req.flights;
+        docs.passengers = req.passengers;
 
         var cost = 0;
         for (var i = 0; i < docs.flights.length; ++i)
             cost += docs.flights[i].cost;
-        var passenger_count = docs.passengers.adult + docs.passengers.children;
+        var passenger_count = passengers.adult + passengers.children;
 
         docs.cost = cost * passenger_count;
 

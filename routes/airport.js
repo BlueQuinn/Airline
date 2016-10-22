@@ -13,4 +13,19 @@ router.get('/', function (req, res) {
    });
 });
 
+router.post('/', function (req, res) {
+
+    var airport = Object.assign(new Airport(), req.body);
+
+    airport.save(function (err, docs) {
+        if (err)
+            res.send(err);
+        res.json(
+            {
+                message: "Thêm sân bay thành công"
+            }
+        );
+    });
+});
+
 module.exports = router;
