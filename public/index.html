@@ -1,119 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>Airline</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Airline</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/daterangepicker.css">
+    <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
-<body>
-  <div id="index-banner">
-    <div class="section no-pad-bot">
-        <br><br>
-        <div class="row">
-          <div class="col s12">
-            <form class="col s6">
-              <div class="row">
-                <div class="col s12">
-                   <h3>Flight</h3>
-                </div>
-                <div class="input-field col s6">
-                  <i class="material-icons prefix">place</i>
-                  <input id="Start" type="text" class="validate">
-                  <label class="white-text" for="Start">Where you are flying from</label>
-                </div>
-                <div class="input-field col s6">
-                  <i class="material-icons prefix">place</i>
-                  <input id="Destination" type="text" class="validate">
-                  <label class="white-text" for="Destination">Where you are flying to</label>
-                </div>
-              </div>
-            </form>
-            <form class="col s6" id="nav-mobile">
-              <div class="col s12">
-                   <h3>Date and Time</h3>
-                </div>
-                <div class="input-field col s6">
-                  <i class="material-icons prefix">date_range</i>
-                  <input id="Date" type="date" class="datepicker white-text">
-                </div>
-            </form>
-          </div>
-        </div>
-        <div class="row">
-          <form class="col s12">
-            <div class="col s6">
-              <div class="col s12">
-                <h3>Ticket</h3>
-              </div>
-              <div class="input-field col s6 white-text">
-                <select>
-                  <option value="1">Economy</option>
-                  <option value="2">Business</option>
-                </select>
-                <label class="white-text">Class</label>
-              </div>
-              <div class="input-field col s6 white-text">
-                <select>
-                  <option value="1">One way</option>
-                  <option value="2">Round trip</option>
-                </select>
-                <label class="white-text">Type</label>
-              </div>
-            </div>
-            <div class="col s6">
-              <div class="col s12">
-                <h3>Passenger</h3>
-              </div>
-              <div class="row">
-                <div class="input-field col s4 white-text">
-                  <select>
-                   <option value="1">0</option>
-                    <option value="2">1</option>
-                    <option value="3">2</option>
-                  </select>
-                  <label class="white-text">Adult</label>
-                </div>
-                <div class="input-field col s4 white-text">
-                  <select>
-                    <option value="1">0</option>
-                    <option value="2">1</option>
-                    <option value="3">2</option>
-                  </select>
-                  <label class="white-text">Child( 2 - < 12 years)</label>
-                </div>
-                <div class="input-field col s4 white-text">
-                  <select>
-                    <option value="1">0</option>
-                    <option value="2">1</option>
-                    <option value="3">2</option>
-                  </select>
-                  <label class="white-text">Infant without seat( < 2 years)
-                  </label>
-                </div>
-              </div>
-            </div>
-            </form>
-          </div>
-          <div class="row">
-            <div class="col s6 offset-s6">
-              <button class="btn waves-effect waves-light">Find
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1">
-    </div>
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="javascripts/materialize.js"></script>
-  <script src="javascripts/init.js"></script>
+<body ng-app="app">
+<div ng-view>
 
-  </body>
+</div>
+<!--  Scripts-->
+<script src="javascripts/jquery-3.1.1.min.js"></script>
+<script src="javascripts/angular.min.js"></script>
+<script src="javascripts/angular-resource.min.js"></script>
+<script src="javascripts/angular-animate.min.js"></script>
+<script src="javascripts/angular-route.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/moment.min.js"></script>
+<script src="javascripts/daterangepicker.js"></script>
+<script src="javascripts/ngProgress.min.js"></script>
+<script src="javascripts/toaster.js"></script>
+<script src="app/app.js"></script>
+<script src="app/factory.js"></script>
+<script src="app/service.js"></script>
+<script src="app/airport.js"></script>
+<script src="app/flight.js"></script>
+<script src="app/booking.js"></script>
+
+</body>
 </html>

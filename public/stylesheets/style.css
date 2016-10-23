@@ -6,7 +6,8 @@
 body
 {
 	padding: 5%;
-	background-color: #F5F5F5;
+	/*background-color: #F5F5F5;*/
+	background-image: url('../background1.jpg');
 }
 
 .btn-transparent

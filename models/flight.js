@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var FlightSchema = new Schema({
     flightId: String,
     departure: String,
-    arrival: String,
+    arrivals: String,
     date: String,
     time: String,
     info: [
