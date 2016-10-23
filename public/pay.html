@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Airline</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <div id="index-banner">
+    <div class="section no-pad-bot">  
+      <div class="row">
+        <div class="col s8">
+          <h4>Các chi phí đặt chỗ</h4>
+          <table style="background: white">
+            <thead>
+              <tr>
+                  <th data-field="name">Mô tả</th>
+                  <th data-field="fee">Thành tiền</th>
+                  <th data-field="tax">Thuế</th>
+                  <th data-field="total">Tổng cộng</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>O_Eco</td>
+                  <td>2,040,000 VND</td>
+                  <td>204,000 VND</td>
+                  <td>2,224,000 VND</td>
+                </tr>
+                <tr>
+                  <td>Airport Tax Domestic</td>
+                  <td>70,000 VND</td>
+                  <td>0 VND</td>
+                  <td>70,000 VND</td>
+                </tr>
+                <tr>
+                  <td>Airport Security</td>
+                  <td>10,000 VND</td>
+                  <td>0 VND</td>
+                  <td>10,000 VND</td>
+                </tr>
+                <tr>
+                  <td>Admin Fee Domestic</td>
+                  <td>100,000 VND</td>
+                  <td>10,000 VND</td>
+                  <td>110,000 VND</td>
+                </tr>
+                <tr>
+                  <td>Các dịch vụ bổ sung đã mua</td>
+                  <td>150,000 VND</td>
+                  <td>15,000 VND</td>
+                  <td>165,000 VND</td>
+                </tr>
+                <tr style="background: red">
+                  <td></td>
+                  <td></td>
+                  <td>Tổng cộng</td>
+                  <td>2,654,000 VND</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col s12">
+          <h4>Thông tin thanh toán</h4>
+          <h5>Hình thức thanh toán</h5>
+            <form action="#">
+              <p>
+                <input name="group1" type="radio" id="test1" />
+                  <label for="test1"><img src="https://book.vietjetair.com/images/merchamex.gif"></label>
+                  <input name="group1" type="radio" id="test2" />
+                  <label for="test2"><img src="https://book.vietjetair.com/images/merchjcb.gif"></label>
+                  <input name="group1" type="radio" id="test3" />
+                  <label for="test3"><img src="https://book.vietjetair.com/images/merchmc2.gif"></label>
+                  <input name="group1" type="radio" id="test4" />
+                  <label for="test4"><img src="https://book.vietjetair.com/images/merchvisa2.gif"></label>
+              </p>
+            </form>
+            <h5>Thông tin thẻ</h5>
+            <h6>Phí tiện ích : 55,000 VND</h6>
+              <div class="input-field col s4">
+                <i class="material-icons prefix"></i>
+                <input id="Start" type="text" class="validate">
+                <label class="white-text" for="Start">Số thẻ</label>
+              </div>
+              <div class="input-field col s4">
+                <i class="material-icons prefix">date_range</i>
+                <input id="Date" type="date" class="datepicker white-text">
+                <label class="white-text" for="Date">Ngày hết hạn</label>
+              </div>
+              <div class="input-field col s4">
+                <i class="material-icons prefix"></i>
+                <input id="NumCard" type="text" class="validate">
+                <label class="white-text" for="NumCard">Mã số CVC</label>
+              </div>
+              <div class="input-field col s4">
+                <i class="material-icons prefix"></i>
+                <input id="Name" type="text" class="validate">
+                <label class="white-text" for="Name">Tên chủ thẻ</label>
+              </div>
+              <div class="input-field col s4">
+                <i class="material-icons prefix"></i>
+                <input id="Addr" type="text" class="validate">
+                <label class="white-text" for="Addr">Địa chỉ</label>
+              </div>
+              <div class="input-field col s4">
+                <i class="material-icons prefix"></i>
+                <input id="City" type="text" class="validate">
+                <label class="white-text" for="City">Thành phố</label>
+              </div>
+              <div class="input-field col s4 white-text">
+              <i class="material-icons prefix"></i>
+              <select>
+                <option value="1">Việt Nam</option>
+                <option value="2">Singapore</option>
+              </select>
+              <label class="white-text">Nước</label>
+            </div>
+              <div class="input-field col s4">
+                <i class="material-icons prefix"></i>
+                <input id="Phone" type="text" class="validate">
+                <label class="white-text" for="Phone">Số Điện thoại</label>
+              </div>
+              <div class="col s3">
+        <button class="btn waves-effect waves-light">Tiếp tục
+                <i class="material-icons right">send</i>
+              </button>
+      </div> 
+        </div>
+        
+    
+  </div>
+  <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+
+  </div>
+
+  
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="javascripts/materialize.js"></script>
+  <script src="javascripts/init.js"></script>
+
+  </body>
+</html>

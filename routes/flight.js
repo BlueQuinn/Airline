@@ -10,12 +10,13 @@ router.get('/', function (req, res) {
 
     switch (filterQuery(req.query))
     {
-        case SEARCH_FLIGHTs: {
+        case SEARCH_FLIGHTS: {
             var flights = [];
+
             var query = {
                 departure: req.query.departure,
-                arrival: req.query.arrival,
-                date: req.query.date,
+                arrivals: req.query.arrivals,
+                date: longToDate(req.query.date),
                 'info.available_seat': req.query.seat_count
             };
 
@@ -26,14 +27,11 @@ router.get('/', function (req, res) {
                 }
 
                 flights = docs;
-                //for (var i in docs)
-                //    flight =
-                //res.json(docs);
 
                 if (req.query.return_date !== undefined) {
-                    query.departure = req.query.arrival;
-                    query.arrival = req.query.departure;
-                    query.date = req.query.return_date;
+                    query.departure = req.query.arrivals;
+                    query.arrivals = req.query.departure;
+                    query.date = longToDate(req.query.return_date);
 
                     Flight.find(query, function (err, docs) {
                         if (err) {
@@ -50,10 +48,12 @@ router.get('/', function (req, res) {
         }
 
         case GET_ARRIVAL: {
-            var projection = {arrival: 1};
-            Flight.find({departure: req.query.departure}, projection, function (err, docs) {
-                if (err)
+            //var projection = {arrivals: 1};
+            Flight.find({departure: req.query.departure}, function (err, docs) {
+                if (err) {
                     res.send(err);
+                    return;
+                }
                 res.json(docs);
             });
             break;
@@ -70,53 +70,11 @@ router.get('/', function (req, res) {
     }
 });
 
-// admin
-router.post('/', function (req, res) {
-
-    var flight = Object.assign(new Flight(), req.body);
-    flight.info.available_seat = flight.info.total_seat;
-    flight.date = flight.date.toString();
-
-    Flight.find({flightId: flight.flightId, date: flight.date}, function (err, data) {
-        if (err) {
-            res.send(err);
-            return;
-        }
-
-        if (data.length < 1) {
-            flight.save(function (err, docs) {
-                if (err)
-                    res.send(err);
-                res.json(
-                    {
-                        message: "Thêm chuyến bay thành công."
-                    }
-                );
-            });
-        }
-        else {
-            if (flight.info !== undefined) {
-                data[0].info.push(flight.info);
-                data[0].save(function (err, docs) {
-                    if (err)
-                        res.send(err);
-                    res.json(
-                        {
-                            message: "Thêm chuyến bay thành công."
-                        }
-                    );
-                });
-            }
-        }
-    });
-
-});
-
 
 function filterQuery(query) {
-    if (query.departure !== undefined && query.arrival !== undefined &&
+    if (query.departure !== undefined && query.arrivals !== undefined &&
         query.seat_count !== undefined && query.date !== undefined)
-        return SEARCH_FLIGHTs;
+        return SEARCH_FLIGHTS;
 
     if (query.departure !== undefined)
         return GET_ARRIVAL;
@@ -125,8 +83,12 @@ function filterQuery(query) {
 }
 
 
+function longToDate(millisecond) {
+    var date = new Date(millisecond);
+    return date.getDate().toString() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+}
 
-var SEARCH_FLIGHTs = 1;
+var SEARCH_FLIGHTS = 1;
 var GET_ALL_FLIGHTS = 2;
 var GET_ARRIVAL = 3;
 

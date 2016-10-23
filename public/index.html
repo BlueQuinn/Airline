@@ -1,19 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Airline</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/daterangepicker.css">
+
+    <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+
 </head>
-<body ng-app="app" ng-controller="AirportController">
-
-<button class="btn" ng-click="loadAll()">Add</button>
-<button class="btn" ng-click="add()">Add</button>
-
-<script src="javascripts/jquery-3.1.0.slim.min.js"></script>
+<body ng-app="app">
+<div id="index-banner" ng-controller="FlightController">
+    <div class="section no-pad-bot">
+        <br><br>
+        <div class="row">
+            <div class="col s12">
+                <form class="col s6">
+                    <div class="row">
+                        <div class="col s12">
+                            <h3>Flight</h3>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">place</i>
+                            <select id="departure">
+                                <option ng-repeat="item in airports" value="{{item.airportId}}">{{item.name}}</option>
+                            </select>
+                            <label for="departure" class="white-text">Where you are flying from</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">place</i>
+                            <select id="Destination">
+                                <option ng-repeat="item in arrivals" value="{{item.airportId}}">{{item.name}}</option>
+                            </select>
+                            <label class="white-text" for="Destination">Where you are flying to</label>
+                        </div>
+                    </div>
+                </form>
+                <form class="col s6" ng-show="isReturn == 'oneway'">
+                    <div class="col s12">
+                        <h3>Date and Time</h3>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <input type="text" id="departure_date_picker"/>
+                    </div>
+                </form>
+                <form class="col s6" ng-show="isReturn == 'return'">
+                    <div class="col s12">
+                        <h3>Date and Time</h3>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <input type="text" id="return_date_picker"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="col s6">
+                    <div class="col s12">
+                        <h3>Ticket</h3>
+                    </div>
+                    <div class="input-field col s6 white-text">
+                        <label class="radio-inline"><input ng-model="isReturn" type="radio" name="optradio" value="oneway" checked="checked">Một chiều</label>
+                        <label class="radio-inline"><input ng-model="isReturn" type="radio" name="optradio" value="return">Khứ hồi</label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="col s12">
+                        <h3>Passenger</h3>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 white-text">
+                            <select id="adult">
+                                <option ng-repeat="item in adult" value="{{item}}">{{item}}</option>
+                            </select>
+                            <label class="white-text">Adult</label>
+                        </div>
+                        <div class="input-field col s4 white-text">
+                            <select id="children">
+                                <option ng-repeat="item in children" value="{{item}}">{{item}}</option>
+                            </select>
+                            <label class="white-text">Child( 2 - < 12 years)</label>
+                        </div>
+                        <div class="input-field col s4 white-text">
+                            <select id="baby">
+                                <option ng-repeat="item in baby" value="{{item}}">{{item}}</option>
+                            </select>
+                            <label class="white-text">Infant without seat( < 2 years)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col s6 offset-s6">
+                <button class="btn waves-effect waves-light" ng-click="searchFlights()">Find
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  Scripts-->
+<script src="javascripts/jquery-3.1.1.min.js"></script>
 <script src="javascripts/angular.min.js"></script>
 <script src="javascripts/angular-resource.min.js"></script>
+<script src="javascripts/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/moment.min.js"></script>
+<script src="javascripts/daterangepicker.js"></script>
+<script src="javascripts/ngProgress.min.js"></script>
+<script src="javascripts/toaster.js"></script>
 <script src="app/app.js"></script>
 <script src="app/factory.js"></script>
 <script src="app/airport.js"></script>
+<script src="app/flight.js"></script>
+
 </body>
 </html>
