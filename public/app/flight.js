@@ -2,7 +2,7 @@
  * Created by lequan on 10/20/2016.
  */
 
-app.controller('FlightController', function ($scope, $location, $route, Airport, Flight, FlightService) {
+app.controller('FlightController', function ($scope, $timeout) {
 
     $scope.airports = [];
     $scope.arrivals = [];
@@ -13,7 +13,7 @@ app.controller('FlightController', function ($scope, $location, $route, Airport,
     $scope.seatCount = 0;
     var adultCount = 1, childrenCount = 0, babyCount = 0;
 
-    var reload = function () {
+   /* var reload = function () {
         Airport.query(function (data) {
             $scope.airports = data;
         });
@@ -22,12 +22,12 @@ app.controller('FlightController', function ($scope, $location, $route, Airport,
     reload();
 
     /*$scope.getArrival = function () {
-     var departureId = $("#departure").val();
-     Flight.query({departure: departureId}, function (data) {
-     $scope.arrivals = data;
-     });
-     $scope.$apply();
-     };*/
+        var departureId = $("#departure").val();
+        Flight.query({departure: departureId}, function (data) {
+            $scope.arrivals = data;
+        });
+        $scope.$apply();
+    };*/
 
     /* $('input[type=radio][name=optradio]').change(function () {
      if ()
@@ -35,90 +35,56 @@ app.controller('FlightController', function ($scope, $location, $route, Airport,
 
     $scope.searchFlights = function () {
 
-        if ($scope.departureId === undefined) {
+        if ($scope.departureId === undefined)
+        {
             alert('Bạn chưa chọn địa điểm đi');
             return;
         }
-        if ($scope.arrivalId === undefined) {
+        if ($scope.arrivalId === undefined)
+        {
             alert('Bạn chưa chọn địa điểm đến');
             return;
         }
-        if ($scope.departureDate === undefined) {
+        if ($scope.departureDate === undefined)
+        {
             alert('Bạn chưa chọn ngày khởi hành');
             return;
         }
-        if ($scope.returnDate === undefined) {
+        if ($scope.returnDate === undefined)
+        {
             alert('Bạn chưa chọn ngày trở về');
             return;
         }
 
-        if ($scope.isReturn == 'oneway') {
+        if ($scope.isReturn == 'oneway')
             $scope.returnDate = 0;
-        }
 
         $scope.seatCount = adultCount + childrenCount + babyCount;
 
         Flight.query(
-            /*{
+            {
                 departure: $scope.departureId,
                 arrival: $scope.arrivalId,
                 date: $scope.departureDate,
                 return_date: $scope.returnDate,
                 seat_count: $scope.seatCount
-            },*/ function (data) {
-                if (data.length < 1) {
+            }, function (flights) {
+                if (flights.length < 1)
+                {
                     alert('Không tìm thấy chuyến bay nào');
                     return;
                 }
-
-                var flights = [];
-                data.forEach(function (flight) {
-                    var item = {};
-                    item.flightId = flight.flightId;
-                    item.departure = flight.departure;
-                    item.arrival = flight.arrival;
-                    item.date = (new Date(parseInt(flight.date))).toDateString();
-                    item.time = flight.time;
-
-                    flight.info.forEach(function (info) {
-                        switch (info.class)
-                        {
-                            case 'C':
-                                item.class = 'Thương gia';
-                                break;
-                            case 'Y':
-                                item.class = 'Phổ thông';
-                                break;
-                        }
-                        switch (info.price)
-                        {
-                            case 'A':
-                                item.price = 'Linh hoạt';
-                                break;
-                            case 'B':
-                                item.price = 'Tiêu chuẩn';
-                                break;
-                            case 'C':
-                                item.price = 'Tiết kiệm';
-                                break;
-                        }
-                        item.total_seat = info.total_seat;
-                        item.cost = info.cost;
-
-                        flights.push(item);
-                    });
-                });
-
-
+        var a = flights;
+                flights = [1,2,3];
                 FlightService.setFlights(flights);
-                $location.path('/booking');
+                window.location = '/booking';
             });
     };
 
     $('#departure').change(function () {
         $scope.departureId = $("#departure").val();
         Flight.query({departure: $scope.departureId}, function (data) {
-            $scope.arrivals = [];
+            //$scope.arrivals = [];
             data.forEach(function (flight) {
                 $scope.airports.forEach(function (airport) {
                     if (flight.arrival == airport.airportId) {
@@ -132,7 +98,6 @@ app.controller('FlightController', function ($scope, $location, $route, Airport,
     $('#arrival').change(function () {
         $scope.arrivalId = $("#arrival").val();
     });
-
     $('#adult').change(function () {
         $scope.children = [];
         $scope.baby = [];
@@ -143,7 +108,6 @@ app.controller('FlightController', function ($scope, $location, $route, Airport,
         }
         $scope.$apply();
     });
-
     $('#children').change(function () {
         $scope.baby = [];
         childrenCount = $("#children").val();
@@ -186,4 +150,5 @@ app.controller('FlightController', function ($scope, $location, $route, Airport,
             $scope.departureDate = (new Date(start)).getTime();
             $scope.returnDate = (new Date(end)).getTime();
         });
+
 });
