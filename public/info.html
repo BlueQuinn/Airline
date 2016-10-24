@@ -7,28 +7,26 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link rel="stylesheet" href="stylesheets/daterangepicker.css">
 </head>
-<body ng-app="app">
-  <div id="index-banner" ng-controller="PassengerController">
+<body>
+  <div id="index-banner">
     <div class="section no-pad-bot">
         <br><br>
         <div class="row">
           <div class="col s12">
-            <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+            <form>
               <div class="row">
-                <div class="form-group">
+                <div class="input-field col s3">
                   <i class="material-icons prefix"></i>
-                  <input name="secondname" type="text" class="validate" ng-model="user.secondname" required>
-                  <label class="white-text" for="secondname">Họ (ví dụ : Nguyễn)*</label>
-                  <p ng-show="userForm.secondname.$invalid && !userForm.secondname.$pristine || (userForm.secondname.$invalid && userForm.secondname.$touched)" class="help-block">You name is required.</p>
+                  <input id="2nd-Name" type="text" class="validate">
+                  <label class="white-text" for="2nd-Name">Họ (ví dụ : Nguyễn)</label>
                 </div>
-                <div class="form-group">
+                <div class="input-field col s3">
                   <i class="material-icons prefix"></i>
-                  <input name="firstname" type="text" class="validate" ng-model="user.firstname" required>
-                  <label class="white-text" for="firstname">Tên đệm và tên:(ví dụ Duc Thinh)*</label>
-                  <p ng-show="userForm.firstname.$invalid && !userForm.firstname.$pristine || userForm.firstname.$invalid && userForm.firstname.$touched" class="help-block">You name is required.</p>
+                  <input id="1st-Name" type="text" class="validate">
+                  <label class="white-text" for="1st-Name">Tên đệm và tên:(ví dụ Duc Thinh)</label>
                 </div>
                 <div class="input-field col s3">
                   <i class="material-icons prefix"></i>
@@ -59,15 +57,14 @@
                 <div class="input-field col s12">
                   
                 </div>
-                <div class="form-group">
+                <div class="input-field col s3">
                   <i class="material-icons prefix"></i>
-                  <input name="email" type="email" class="validate" ng-model="user.email">
+                  <input id="Email" type="email" class="validate">
                   <label class="white-text" for="Email">Email</label>
-                  <p ng-show="userForm.email.$invalid && !userForm.email.$pristine || userForm.email.$invalid && userForm.email.$touched" class="help-block">You name is required.</p>
                 </div>
                 <div class="input-field col s3">
                   <i class="material-icons prefix">date_range</i>
-                  <input id="birthday" type="text" >
+                  <input id="Birthday" type="date" class="datepicker white-text">
                   <label class="white-text" for="Birthday">Ngày sinh :</label>
                 </div>
                  <div class="input-field col s3">
@@ -87,7 +84,7 @@
                 </div>
                 <div class="input-field col s3">
                   <i class="material-icons prefix">date_range</i>
-                  <input id="date-id" type="text" class="datepicker white-text">
+                  <input id="Date-id" type="date" class="datepicker white-text">
                   <label class="white-text" for="Date-id">Ngày hết hạn hộ chiếu :</label>
                 </div>
                 <div class="input-field col s3">
@@ -113,21 +110,11 @@
         </div>
       </div>
     </div>
+    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
   <!--  Scripts-->
-<script src="javascripts/jquery-3.1.1.min.js"></script>
-<script src="javascripts/angular.min.js"></script>
-<script src="javascripts/angular-resource.min.js"></script>
-<script src="javascripts/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
-<script src="javascripts/bootstrap.min.js"></script>
-<script src="javascripts/moment.min.js"></script>
-<script src="javascripts/daterangepicker.js"></script>
-<script src="javascripts/ngProgress.min.js"></script>
-<script src="javascripts/toaster.js"></script>
-<script src="app/app.js"></script>
-<script src="app/factory.js"></script>
-<script src="app/airport.js"></script>
-<script src="app/passenger.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="javascripts/materialize.js"></script>
+  <script src="javascripts/init.js"></script>
 
   </body>
 </html>
