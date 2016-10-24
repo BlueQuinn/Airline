@@ -2,23 +2,9 @@
  * Created by lequan on 10/20/2016.
  */
 
-app.controller('AirportController', function ($scope, Airport) {
+app.service('AirportService', function (Airport) {
 
-    //$scope.airport = new Airport();
+    this.airports = function () {
 
-    $scope.getAirports = function () {
-        $scope.airports = Airport.query(function (data) {
-            var a =data;
-        });
     };
-
-    var reload = function () {
-        $scope.airports = Airport.query(function (data) {
-            var a =data;
-        });
-
-        $scope.airport = {};
-    };
-
-    reload();
 });

@@ -11,5 +11,23 @@ app.controller('PassengerController', function ($scope, Passenger) {
         });
 
     };
+    $('input[id="birthday"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        },
+        function (start, end, label) {
+        });
 
+    $('input[id="date-id"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        },
+        function (start, end, label) {
+        });
 });

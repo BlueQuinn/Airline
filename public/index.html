@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Airline</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/daterangepicker.css">
+    <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
-<body ng-app="app" ng-controller="AirportController">
+<body ng-app="app">
+<div ng-view>
 
-<button class="btn" ng-click="loadAll()">Add</button>
-<button class="btn" ng-click="add()">Add</button>
-
-<script src="javascripts/jquery-3.1.0.slim.min.js"></script>
+</div>
+<!--  Scripts-->
+<script src="javascripts/jquery-3.1.1.min.js"></script>
 <script src="javascripts/angular.min.js"></script>
 <script src="javascripts/angular-resource.min.js"></script>
+<script src="javascripts/angular-animate.min.js"></script>
+<script src="javascripts/angular-route.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/moment.min.js"></script>
+<script src="javascripts/daterangepicker.js"></script>
+<script src="javascripts/ngProgress.min.js"></script>
+<script src="javascripts/toaster.js"></script>
 <script src="app/app.js"></script>
 <script src="app/factory.js"></script>
+<script src="app/service.js"></script>
 <script src="app/airport.js"></script>
+<script src="app/flight.js"></script>
+<script src="app/booking.js"></script>
+
 </body>
 </html>
