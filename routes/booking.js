@@ -4,9 +4,10 @@
 
 var Hashids = require('hashids');
 var express = require('express');
-var Booking = require('../models/booking')
+var Booking = require('../models/booking');
+var Flight = require('../models/flight')
 var router = express.Router();
-var hashids = new Hashids();
+var hashids = new Hashids("1312465_1312548_1312561", 6);
 
 router.post('/', function (req, res) {
 
@@ -14,38 +15,81 @@ router.post('/', function (req, res) {
         if (err)
             res.send(err);
 
-        var docs = new Booking();
-        docs.bookingId = hashids.encode(count);
-        docs.date = new Date().getTime() * 1000;     // in seconds
-        docs.status = false;
-        docs.flights = req.flights;
-        docs.passengers = req.passengers;
+        var booking = new Booking();
+        booking.bookingId = hashids.encode(count);
+        booking.date = (new Date()).getTime().toString();     // in seconds
+        booking.status = false;
+        booking.cost = req.body.cost;
+        booking.flights = req.body.flights;
+        booking.passengers = req.body.passengers;
 
-        var cost = 0;
-        for (var i = 0; i < docs.flights.length; ++i)
-            cost += docs.flights[i].cost;
-        var passenger_count = passengers.adult + passengers.children;
-
-        docs.cost = cost * passenger_count;
-
-        Booking.save(function (err, docs) {
-            if (err)
+        booking.save(function (err, docs) {
+            if (err) {
                 res.send(err);
+                return;
+            }
 
-            res.json(
-                {
-                    message: 'Đặt chỗ thành công. Hệ thống sẽ giữ chỗ cho bạn trong vòng 24 tiếng. Trong thời gian này bạn hãy nhanh chóng điền thông tin hành khách để lấy vé'
+            var seat_count = booking.passengers.adult + booking.passengers.children;
 
-                }
-            );
+            booking.flights.forEach(function (flight) {
+                var query = {
+                    flightId: flight.flightId,
+                    date: flight.date
+                };
+                Flight.find(query, function (err, docs) {
+                    if (err) {
+                        res.send(err);
+                        return;
+                    }
+
+                    if (docs.length > 0 && docs[0].info.length > 0) {
+                        var index = getIndex(flight.class, flight.price);
+                        docs[0].info[index].available_seat = docs[0].info[index].available_seat - seat_count;
+
+                        docs[0].save(function (err) {
+                           if (err) {
+                               res.send(err);
+                               return;
+                           }
+                            res.send(
+                                {
+                                    message: 'Mã đặt chỗ của bạn là ' + booking.bookingId + '\nHãy nhanh chóng điền thông tin hành khách để lấy vé',
+                                    bookingId: booking.bookingId,
+                                    status: 200
+                                });
+                        });
+                    }
+                });
+            });
+
+
         });
 
-
-
     });
+
 });
 
 
+function getIndex(ticketClass, price) {
+    if (ticketClass == 'C') {
+        switch (price) {
+            case 'F':
+                return 0;
+            case 'S':
+                return 1;
+        }
+    }
+    else {
+        switch (price) {
+            case 'F':
+                return 2;
+            case 'S':
+                return 3;
+            case 'C':
+                return 4;
+        }
+    }
+}
 
 
 module.exports = router;

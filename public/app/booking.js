@@ -2,14 +2,32 @@
  * Created by lequan on 10/20/2016.
  */
 
-app.controller('BookingController', function ($scope, Booking, FlightService) {
+app.controller('BookingController', function ($scope, $location, Booking, AirportService, FlightService, TicketService) {
 
     $scope.flights = FlightService.getFlights();
+
     $scope.departureFlight = -1;
     $scope.returnFlight = -2;
+    $scope.total_passenger = $scope.flights.adult + $scope.flights.children + $scope.flights.baby;
     //$scope.departureFlight = -1;
+
+    if ($scope.flights.departure.hasOwnProperty('0')) {
+        $scope.hasDeparture = true;
+        $scope.flights.departure = AirportService.getCity($scope.flights.departure);
+    }
+    else
+        $scope.hasDeparture = false;
+
+
+    $scope.hasReturn = true;
     if ($scope.flights.return !== undefined) {
         $scope.returnFlight = -1;
+
+        if ($scope.flights.return.hasOwnProperty('0')) {
+            $scope.flights.return = AirportService.getCity($scope.flights.return);
+        }
+        else
+            $scope.hasReturn = false;
     }
 
     $scope.reserve = function () {
@@ -25,36 +43,37 @@ app.controller('BookingController', function ($scope, Booking, FlightService) {
         var departureFlight = $scope.flights.departure[$scope.departureFlight];
         var booking = {
             cost: $scope.departure.total_cost,
-            passenger: {
+            passengers: {
                 adult: $scope.flights.adult,
                 children: $scope.flights.children,
                 baby: $scope.flights.baby
             },
-            flight: [
+            flights: [
                 {
                     flightId: departureFlight.flightId,
-                    date: (new Date(departureFlight.date)).getTime(),
-                    class: departureFlight.class,
-                    price: departureFlight.price
+                    date: departureFlight.date,
+                    class: getClass(departureFlight.class),
+                    price: getPrice(departureFlight.price)
                 }
             ]
         };
         if ($scope.returnFlight > 0) {
             var returnFlight = $scope.flights.return[$scope.returnFlight];
-            booking.flight.push({
+            booking.flights.push({
                 returnFlight: {
                     flightId: returnFlight.flightId,
-                    date: (new Date(returnFlight.date)).getTime(),
-                    class: returnFlight.class,
-                    price: returnFlight.price
+                    date: returnFlight.date,
+                    class: getClass(returnFlight.class),
+                    price: getPrice(returnFlight.price)
                 }
             });
             booking.cost += $scope.return.total_cost;
         }
 
-        Booking.save(booking, function () {
-
-
+        Booking.save(booking, function (data) {
+            alert(data.message);
+            TicketService.setTicket(booking.passengers, data.bookingId, booking.cost);
+            $location.path('/passenger');
         });
     };
 
@@ -80,12 +99,11 @@ app.controller('BookingController', function ($scope, Booking, FlightService) {
         ticket.class = flight.class;
         ticket.price = flight.price;
 
-        ticket.total_passenger = $scope.flights.adult + $scope.flights.children + $scope.flights.baby;
         ticket.adult_cost = flight.cost;
         ticket.children_cost = flight.cost * 0.8;
         ticket.baby_cost = flight.cost / 10;
 
-        ticket.cost = ticket.cost * $scope.flights.adult
+        ticket.cost = ticket.adult_cost * $scope.flights.adult
             + ticket.children_cost * $scope.flights.children
             + ticket.baby_cost * $scope.flights.baby;
 
@@ -94,3 +112,27 @@ app.controller('BookingController', function ($scope, Booking, FlightService) {
     }
 
 });
+
+function getClass(ticketClass)
+{
+    switch (ticketClass)
+    {
+        case 'Thương gia':
+            return 'C';
+        case 'Phổ thông':
+            return 'Y';
+    }
+}
+
+function getPrice(ticketClass)
+{
+    switch (ticketClass)
+    {
+        case 'Linh hoạt':
+            return 'F';
+        case 'Tiêu chuẩn':
+            return 'S';
+        case 'Tiết kiệm':
+            return 'C';
+    }
+}

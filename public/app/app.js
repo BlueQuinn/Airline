@@ -2,7 +2,7 @@
  * Created by lequan on 10/20/2016.
  */
 
-var app = angular.module('app', ['ngResource', 'ngRoute']);
+var app = angular.module('app', ['ngResource', 'ngRoute', 'ngMaterial']);
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -14,8 +14,12 @@ app.config(function ($routeProvider) {
             controller: 'FlightController'
         })
         .when("/booking", {
-            templateUrl: "find.html",
+            templateUrl: "booking.html",
             controller: 'BookingController'
+        })
+        .when("/passenger", {
+            templateUrl: "passenger.html",
+            controller: 'PassengerController'
         });
 });
 
