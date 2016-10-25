@@ -1,83 +1,70 @@
-<div ng-controller="BookingController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Airline</title>
 
-    <div class="container">
-        <h5>Chọn chuyến bay khởi hành</h5>
-        <form name="flight_dashboard" novalidate>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Mã chuyến bay</th>
-                    <th>Nơi đi</th>
-                    <th>Nơi đến</th>
-                    <th>Ngày</th>
-                    <th>Giờ bay</th>
-                    <th>Hạng vé</th>
-                    <th>Mức giá</th>
-                    <th>Số ghế</th>
-                    <th>Giá vé</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in flights">
-                    <td>{{item.flightId}}</td>
-                    <td>{{item.departure}}</td>
-                    <td>{{item.arrival}}</td>
-                    <td>{{item.date}}</td>
-                    <td>{{item.time}}</td>
-                    <td>{{item.class}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.total_seat}}</td>
-                    <td>{{item.cost}}</td>
-                    <td>
-                        <div class="btn-group">
-                            <label><input type="radio" name="choose-flight">Chọn</label>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <div class="container">
-        <h5>Chọn chuyến bay khứ hồi</h5>
-        <form name="flight_dashboard" novalidate>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Mã chuyến bay</th>
-                    <th>Nơi đi</th>
-                    <th>Nơi đến</th>
-                    <th>Ngày</th>
-                    <th>Giờ bay</th>
-                    <th>Hạng vé</th>
-                    <th>Mức giá</th>
-                    <th>Số ghế</th>
-                    <th>Giá vé</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in flights">
-                    <td>{{item.flightId}}</td>
-                    <td>{{item.departure}}</td>
-                    <td>{{item.arrival}}</td>
-                    <td>{{item.date}}</td>
-                    <td>{{item.time}}</td>
-                    <td>{{item.class}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.total_seat}}</td>
-                    <td>{{item.cost}}</td>
-                    <td>
-                        <div class="btn-group">
-                            <label><input type="radio" name="choose-flight">Chọn</label>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/daterangepicker.css">
+    <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+
+</head>
+<body ng-app="app">
+<div class="container" ng-controller="BookingController">
+    <h5>Chọn chuyến bay khởi hành</h5>
+    <form name="flight_dashboard" novalidate>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Mã chuyến bay</th>
+                <th>Nơi đi</th>
+                <th>Nơi đến</th>
+                <th>Ngày</th>
+                <th>Giờ bay</th>
+                <th>Hạng vé</th>
+                <th>Mức giá</th>
+                <th>Số ghế</th>
+                <th>Giá vé</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in flights">
+                <td>{{item.flightId}}</td>
+                <td>{{item.departure}}</td>
+                <td>{{item.arrival}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.class}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.total_seat}}</td>
+                <td>{{item.cost}}</td>
+                <td>
+                    <div class="btn-group">
+                        <label><input type="radio" name="choose-flight">Chọn</label>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
+
+<script src="javascripts/jquery-3.1.1.min.js"></script>
+<script src="javascripts/angular.min.js"></script>
+<script src="javascripts/angular-resource.min.js"></script>
+<script src="javascripts/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/moment.min.js"></script>
+<script src="javascripts/daterangepicker.js"></script>
+<script src="javascripts/ngProgress.min.js"></script>
+<script src="javascripts/toaster.js"></script>
+<script src="app/app.js"></script>
+<script src="app/factory.js"></script>
+<script src="app/airport.js"></script>
+<script src="app/flight.js"></script>
+</body>
